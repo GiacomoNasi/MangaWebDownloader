@@ -6,7 +6,7 @@ from image_url_providers.image_url_provider import ImageUrlProvider
 
 
 class ImageUrlProviderHastareader(ImageUrlProvider):
-    # It could be impossible to implement: looks like it is hard to deduce png urls since thay are not present in manga hml
+    # It could be impossible to implement: looks like it is hard to deduce png urls since they are not present in manga hml
     # and they are very different from manga url
 
 

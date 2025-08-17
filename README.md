@@ -25,6 +25,13 @@ Replace `main_script.py` with the actual name of your main Python file.
 - Downloads all manga images from a remote web page or a locally saved page.
 - Works well if the web page contains all the images to be downloaded.
 
-## Notes
+## Technical Notes
 
-Tested on Python 3.13.
+The project has a **modular structure** that allows you to create a custom downloader for each different website. 
+Currently, only the basic downloader is implemented, which scans all `<img src="..."/>` tags present in the web page.
+
+It is possible to implement **custom logic for each website**, enabling advanced workflows such as querying multiple URLs to generate a single PDF, or handling specific site layouts.
+
+This flexibility makes it easy to extend the project for more complex and site-specific downloading workflows.
+
+Tested on **Python 3.13**.
