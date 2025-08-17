@@ -7,7 +7,7 @@ from image_url_providers import utils
 from image_url_providers.image_url_provider import ImageUrlProvider
 
 
-class ImageUrlProviderMangaworld(ImageUrlProvider):
+class ImageUrlProviderBasic(ImageUrlProvider):
 
     def __init__(self, manga_html):
         self.image_urls = utils.get_png_urls(manga_html)

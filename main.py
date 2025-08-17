@@ -11,7 +11,6 @@ from bs4 import BeautifulSoup
 
 import image_downloader
 from image_url_providers import image_url_provider_factory
-from image_url_providers.image_url_provider_mangaworld import ImageUrlProviderMangaworld
 
 
 def create_pdf(png_files, output_path):
@@ -52,10 +51,17 @@ if __name__ == '__main__':
         #     if src.lower().endswith('.png') or '.png?' in src.lower():
         #         png_urls.append(src)
 
-        session = requests_cache.CachedSession('manga_html_cache')
+        if manga_url.startswith('http://') or manga_url.startswith('https://'):
+            print(f'Processing manga URL: {manga_url}')
 
-        session = requests.get(manga_url)
-        manga_html = session.content
+            session = requests_cache.CachedSession('manga_html_cache')
+
+            session = requests.get(manga_url)
+            manga_html = session.content
+        else:
+            print(f'Processing local file: {manga_url}')
+            with open(manga_url, 'r', encoding='utf-8') as f:
+                manga_html = f.read()
 
         manga_world_downloader = image_url_provider_factory.get_image_url_downloader(manga_url, manga_html)
 
@@ -65,7 +71,7 @@ if __name__ == '__main__':
 
         for i, url in enumerate(png_urls):
             print(f'Getting image {i + 1}/{len(png_urls)}: {url}')
-            content = image_downloader.get_image(url)
+            content = image_downloader.get_image(manga_url, url)
             png_path = os.path.join(os.path.normpath(folder_path), str(datetime.datetime.now().timestamp()))
             with open(png_path, 'wb') as f:
                 f.write(content)

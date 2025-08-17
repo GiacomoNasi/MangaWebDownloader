@@ -7,7 +7,7 @@ def get_png_urls(html):
 
     for img in soup.find_all('img'):
         src = img.get('src', '')
-        if '.png' in src.lower():
+        if src.lower().endswith('.png') or src.lower().endswith('.jpg'):
             image_urls.append(src)
 
     return image_urls
